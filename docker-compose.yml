@@ -1,0 +1,53 @@
+services:
+  postgres:
+    image: postgres:15.4
+    container_name: postgres
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    networks:
+      - library-api
+    restart: always
+
+  library_api:
+    container_name: library_api
+    image: library-api:dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./.env
+    environment:
+      HOST: localhost
+      HOST_BASE_URL: "http://localhost:3000"
+      DOCKER_HOST_BASE_URL: "http://library_api:3000"
+      PORT: "3000"
+      NODE_ENV: development
+      DEBUG: "true"
+      APP_NAME: "Library Api"
+    command: yarn start:dev
+    ports:
+      - 3000:3000
+    networks:
+      - library-api
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/app/
+      - backend_node_modules:/app/node_modules
+    restart: unless-stopped
+
+networks:
+  library-api:
+    driver: bridge
+
+volumes:
+  database:
+  backend_node_modules:
