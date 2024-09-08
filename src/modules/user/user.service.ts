@@ -94,11 +94,14 @@ export class UserService {
     }
 
     const availableBorrowRecord = await this.borrowRecordRepository.findOne({
-      where: { user: { id: user.id }, book: { id: book.id }, isReturned: false },
+      where: { book: { id: book.id }, isReturned: false },
+      relations: ["user"],
     });
 
-    if (availableBorrowRecord) {
-      throw new BadRequestException("Book is already borrowed");
+    if (availableBorrowRecord?.user.id === user.id) {
+      throw new BadRequestException("You already borrowed this book");
+    } else if (availableBorrowRecord) {
+      throw new BadRequestException("Book is already borrowed by another user");
     }
 
     const borrowRecord = this.borrowRecordRepository.create({
