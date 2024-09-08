@@ -1,6 +1,8 @@
 # Library Case API
 
-This project is an API for a library management system built using Express.js, TypeORM, PostgreSQL, and tsyringe for Dependency Injection (DI). It supports CRUD operations for users and books, along with the ability to borrow and return books. The project follows a modular architecture with service and repository patterns and includes custom error handling using HttpException classes.
+The Library API is a system for managing books and users, designed with Node.js, Express.js, and TypeORM. It offers CRUD operations for books and users, along with the ability to borrow and return books, complete with a user rating system. The API employs a highly modular architecture powered by tsyringe for dependency injection, making the codebase maintainable and testable.
+
+To improve performance, Redis caching is integrated to reduce database load for frequently accessed data, and the project is fully tested with comprehensive End-to-End (E2E) tests using Jest and Supertest. The entire project is containerized with Docker Compose, allowing seamless deployment and scaling in any environment.
 
 ## Table of Contents
 
