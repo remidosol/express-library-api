@@ -128,8 +128,8 @@ src/
   │   │   └── book.service.ts       # Book service for business logic
   │   │   └── book.controller.ts    # Book controller
   │   │   └── book.middleware.ts    # Book middleware to cache fetched 
-  │   ├── tests/
-  │   │   └── library-api.e2e.spec.ts              # E2E tests of Library API
+  ├── tests/
+  │   └── library-api.e2e.spec.ts              # E2E tests of Library API
   └── app.ts                        # Application entry point
   └── server.ts                     # Server setup
 ```
