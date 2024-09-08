@@ -109,9 +109,10 @@ src/
   │   └── logger.middleware.ts # Middleware for logging requests
   ├── modules/
   │   ├── user/
-  │   │   ├── dto/        # User entity definition
+  │   │   ├── dto/        # User DTOs
   │   │   │   └── create-user.dto.ts    # Create user DTO with validation
   │   │   │   └── find-user.dto.ts    # Find user DTO with validation
+  │   │   │   └── return-book.dto.ts    # Return book DTO with validation
   │   │   │   └── user.dto.ts    # User DTO for controlling data exposure and serialization
   │   │   │   └── return-book.dto.ts    # Return book DTO for score validation
   │   │   ├── entities/        # User entity definition
@@ -120,13 +121,15 @@ src/
   │   │   └── user.service.ts       # User service for business logic
   │   │   └── user.controller.ts    # User controller
   │   ├── book/
-  │   │   ├── dto/        # User entity definition
+  │   │   ├── dto/        # Book DTOs
   │   │   │   └── create-book.dto.ts    # Create book DTO with validation
   │   │   │   └── find-book.dto.ts    # Find book DTO with validation
-  │   │   │   └── book.dto.ts    # Book DTO for controlling data exposure and serialization
   │   │   └── book.entity.ts        # Book entity definition
   │   │   └── book.service.ts       # Book service for business logic
   │   │   └── book.controller.ts    # Book controller
+  │   │   └── book.middleware.ts    # Book middleware to cache fetched 
+  │   ├── tests/
+  │   │   └── library-api.e2e.spec.ts              # E2E tests of Library API
   └── app.ts                        # Application entry point
   └── server.ts                     # Server setup
 ```
