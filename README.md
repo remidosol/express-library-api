@@ -12,6 +12,7 @@ This project is an API for a library management system built using Express.js, T
 - [Running the Application with Docker](#running-the-application-with-docker)
 - [Environment Variables](#environment-variables)
 - [Endpoints](#endpoints)
+- [Testing](#testing)
 - [Error Handling](#error-handling)
 - [Dependency Injection (DI) Setup](#dependency-injection-di-setup)
 - [License](#license)
