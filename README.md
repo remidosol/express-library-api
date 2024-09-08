@@ -186,7 +186,7 @@ Here are the main API endpoints
 ### Book Endpoints
 
 - **GET /books**: Get a list of all books.
-- **GET /books/:bookId**:bookId: Get a specific book by ID, including its average score.
+- **GET /books/:bookId**: Get a specific book by ID, including its average score.
 - **POST /books**: Create a new book.
 
 ### Borrow/Return Endpoints
