@@ -1,2 +1,2 @@
 export * from "./user.entity";
-export * from "./book-borrow.entity";
+export * from "./borrow-record.entity";

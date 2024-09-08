@@ -49,7 +49,7 @@ export class UserController {
 
     try {
       await this.userService.createUser(name);
-      res.status(204).send();
+      res.status(201).send();
     } catch (err) {
       // console.log(JSON.stringify((err as any).driverError, null, 2));
       // console.error(err);
@@ -105,7 +105,7 @@ export class UserController {
 
   public routes() {
     this.router.get("/users", serializerMiddleware(User), this.getUsers.bind(this));
-    this.router.get("/users/:userId", serializerMiddleware(UserDTO), this.getUser.bind(this));
+    this.router.get("/users/:userId", serializerMiddleware(User), this.getUser.bind(this));
     this.router.post("/users", validationMiddleware(CreateUserDTO), this.createUser.bind(this));
     this.router.post("/users/:userId/borrow/:bookId", this.borrowBook.bind(this));
     this.router.post("/users/:userId/return/:bookId", validationMiddleware(ReturnBookDTO), this.returnBook.bind(this));

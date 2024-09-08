@@ -16,6 +16,6 @@ export class BorrowRecord {
   @Column({ type: "boolean", default: false })
   isReturned!: boolean;
 
-  @Column({ type: "int", default: 0 })
+  @Column({ type: "int", default: -1 })
   userScore!: number;
 }

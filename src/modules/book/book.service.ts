@@ -1,11 +1,9 @@
 import { inject, injectable } from "tsyringe";
-import { AppDataSource } from "../../config/database";
 import { Book } from "./book.entity";
 import { Repository } from "typeorm";
 
 @injectable()
 export class BookService {
-  // private bookRepository = AppDataSource.getRepository(Book);
   constructor(@inject("BookRepository") private bookRepository: Repository<Book>) {}
 
   /**

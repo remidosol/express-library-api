@@ -6,6 +6,7 @@ import { BookController } from "../modules/book/book.controller";
 import { Book } from "../modules/book/book.entity";
 import { User, BorrowRecord } from "../modules/user/entities";
 import { AppDataSource } from "./database";
+import { CacheService } from "../modules/cache/cache.service";
 
 // Register repositories
 container.register("UserRepository", {
@@ -21,6 +22,7 @@ container.register("BorrowRecordRepository", {
 // Register services
 container.registerSingleton<UserService>(UserService);
 container.registerSingleton<BookService>(BookService);
+container.registerSingleton<CacheService>(CacheService);
 
 // Register controllers
 container.registerSingleton<UserController>(UserController);

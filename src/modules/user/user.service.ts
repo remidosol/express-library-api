@@ -1,17 +1,17 @@
 import { inject, injectable } from "tsyringe";
-// import { AppDataSource } from "../../config/database";
-import { User, BorrowRecord } from "./entities";
-import { UserDTO } from "./dto/user.dto";
-import { Book } from "../book/book.entity";
 import { Repository } from "typeorm";
 import { BadRequestException, NotFoundException } from "../../exceptions/http-exceptions";
+import { Book } from "../book/book.entity";
+import { BorrowRecord, User } from "./entities";
+import { CacheService } from "../cache/cache.service";
 
 @injectable()
 export class UserService {
   constructor(
     @inject("UserRepository") private userRepository: Repository<User>,
     @inject("BookRepository") private bookRepository: Repository<Book>,
-    @inject("BorrowRecordRepository") private borrowRecordRepository: Repository<BorrowRecord>
+    @inject("BorrowRecordRepository") private borrowRecordRepository: Repository<BorrowRecord>,
+    @inject(CacheService) private cacheService: CacheService
   ) {}
 
   /**
@@ -30,7 +30,7 @@ export class UserService {
    *
    * @returns a user with books
    */
-  public async getUserWithBooks(userId: number): Promise<UserDTO | null> {
+  public async getUserWithBooks(userId: number): Promise<User | null> {
     const user = await this.userRepository.findOne({
       where: { id: userId },
       relations: ["borrowRecords", "borrowRecords.book"],
@@ -53,14 +53,12 @@ export class UserService {
         name: record.book.name,
       }));
 
-    return {
-      id: user.id,
-      name: user.name,
-      books: {
-        past: pastBooks,
-        present: presentBooks,
-      },
+    user.books = {
+      past: pastBooks || [],
+      present: presentBooks,
     };
+
+    return user;
   }
 
   /**
@@ -150,6 +148,12 @@ export class UserService {
     const newScoreOfBook = await this.calculateBookScore(bookId);
 
     await this.bookRepository.save({ ...book, score: newScoreOfBook });
+
+    const key = `book-${bookId}`;
+    const cachedBook = await this.cacheService.get(key);
+    if (cachedBook) {
+      await this.cacheService.del(key);
+    }
 
     return this.borrowRecordRepository.save(borrowRecord);
   }
