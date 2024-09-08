@@ -28,7 +28,7 @@ To improve performance, Redis caching is integrated to reduce database load for 
 
 ### Book Management
 
-- Create, update, and delete books.
+- Create book
 - Retrieve detailed information about each book, including user scores and borrowing statistics.
 
 ### Borrow & Return
