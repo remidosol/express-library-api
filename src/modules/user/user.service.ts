@@ -68,6 +68,12 @@ export class UserService {
    * @returns created user
    */
   public async createUser(name: string): Promise<User> {
+    const alreadyExists = await this.userRepository.findOne({ where: { name } });
+
+    if (alreadyExists) {
+      throw new BadRequestException("User already exists");
+    }
+
     const user = this.userRepository.create({ name });
     return this.userRepository.save(user);
   }

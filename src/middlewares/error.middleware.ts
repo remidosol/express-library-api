@@ -8,7 +8,6 @@ export function errorMiddleware(err: HttpException, req: Request, res: Response,
         return res.status(409).json({
           statusCode: 409,
           message: "Conflict: Duplicate entry.",
-          error: "UniqueConstraintViolation",
         });
 
       case "23503":
@@ -34,11 +33,11 @@ export function errorMiddleware(err: HttpException, req: Request, res: Response,
     }
   }
 
-  const status = err.status || 500;
+  const statusCode = err.statusCode || 500;
   const message = err.message || "Something went wrong";
 
-  return res.status(status).json({
-    status,
+  return res.status(statusCode).json({
+    statusCode,
     message,
   });
 }
