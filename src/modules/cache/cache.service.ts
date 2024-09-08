@@ -16,7 +16,7 @@ export class CacheService {
   async createRedisClient() {
     (async () => {
       this.cache = createClient({
-        url: process.env.REDIS_URL,
+        // url: process.env.REDIS_URL,
         password: process.env.REDIS_PASSWORD,
         socket: {
           host: process.env.REDIS_HOST,
