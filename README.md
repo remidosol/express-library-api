@@ -110,20 +110,20 @@ src/
   ├── modules/
   │   ├── user/
   │   │   ├── dto/        # User entity definition
-  │     │   │   └── create-user.dto.ts    # Create user DTO with validation
-  │     │   │   └── find-user.dto.ts    # Find user DTO with validation
-  │     │   │   └── user.dto.ts    # User DTO for controlling data exposure and serialization
-  │     │   │   └── return-book.dto.ts    # Return book DTO for score validation
+  │   │   │   └── create-user.dto.ts    # Create user DTO with validation
+  │   │   │   └── find-user.dto.ts    # Find user DTO with validation
+  │   │   │   └── user.dto.ts    # User DTO for controlling data exposure and serialization
+  │   │   │   └── return-book.dto.ts    # Return book DTO for score validation
   │   │   ├── entities/        # User entity definition
-  │     │   │   └── borrow-record.entity.ts    # Borrow record entity of User
-  │     │   │   └── user.entity.ts    # User entity definition
+  │   │   │   └── borrow-record.entity.ts    # Borrow record entity of User
+  │   │   │   └── user.entity.ts    # User entity definition
   │   │   └── user.service.ts       # User service for business logic
   │   │   └── user.controller.ts    # User controller
   │   ├── book/
   │   │   ├── dto/        # User entity definition
-  │     │   │   └── create-book.dto.ts    # Create book DTO with validation
-  │     │   │   └── find-book.dto.ts    # Find book DTO with validation
-  │     │   │   └── book.dto.ts    # Book DTO for controlling data exposure and serialization
+  │   │   │   └── create-book.dto.ts    # Create book DTO with validation
+  │   │   │   └── find-book.dto.ts    # Find book DTO with validation
+  │   │   │   └── book.dto.ts    # Book DTO for controlling data exposure and serialization
   │   │   └── book.entity.ts        # Book entity definition
   │   │   └── book.service.ts       # Book service for business logic
   │   │   └── book.controller.ts    # Book controller
