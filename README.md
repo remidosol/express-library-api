@@ -19,17 +19,66 @@ This project is an API for a library management system built using Express.js, T
 
 ## Features
 
-- **User Management**: Create users, retrieve user details (including borrowed books), and manage their borrowing history.
-- **Book Management**: Create books, retrieve book details, and manage book borrowing and returning.
-- **Borrow & Return**: Users can borrow and return books, with the system tracking the borrowing history, including user scores for books they have read.
-- **Dependency Injection**: Uses tsyringe for injecting repositories, services, and controllers, ensuring a modular and testable architecture.
-- **Custom Error Handling**: Handles HTTP exceptions with custom HttpException classes and a global error middleware for consistent error responses.
+### User Management
+
+- Create users and retrieve user details, including their current and past borrowed books.
+- Manage each user's borrowing history, providing a detailed view of the books they have borrowed or are currently reading.
+
+### Book Management
+
+- Create, update, and delete books.
+- Retrieve detailed information about each book, including user scores and borrowing statistics.
+
+### Borrow & Return
+
+- Users can borrow and return books, with a system that tracks the borrowing history.
+- After returning a book, users can provide a score, which the system uses to calculate the book’s average rating.
+- The system handles multiple borrowing scenarios, ensuring accurate tracking of each user's borrowing activity.
+
+### Dependency Injection
+
+- Uses **tsyringe** for injecting repositories, services, and controllers, promoting a modular, maintainable, and testable architecture.
+- This design ensures that components are loosely coupled and easy to mock for unit tests, simplifying the development process.
+
+### Custom Error Handling
+
+- The API uses custom HttpException classes to handle HTTP errors consistently.
+- A global error middleware captures all unhandled exceptions and provides structured error responses, improving API robustness and user feedback.
+
+### Redis Caching
+
+- Integrates Redis to cache frequently requested data, such as book listings or user details, to improve performance.
+- Configurable TTL (Time-to-Live) for each cached item ensures that cached data stays fresh while reducing unnecessary database calls.
+- The cache can be easily invalidated or refreshed based on custom logic, ensuring that the application remains responsive and scalable.
+
+### End-to-End (E2E) Testing
+
+- Comprehensive E2E tests using Jest and Supertest to ensure that the API endpoints work as expected.
+- Tests simulate actual HTTP requests and validate the behavior of user and book management, borrowing, and returning functionality.
+- Tests can be executed in a Dockerized environment, ensuring that the entire system, including the database and cache, is tested in real-world conditions.
+
+### Dockerized Setup
+
+- Docker Compose is used to orchestrate services like the Express.js application, PostgreSQL, and Redis.
+- Easily set up and run the application in a containerized environment, providing a consistent development and deployment experience across different environments.
+
+### Database Synchronization
+
+- Leverages TypeORM for database migrations and synchronization, ensuring that the PostgreSQL schema is up to date with the entity definitions.
+- Supports automatic schema synchronization during development and migration scripts for production environments.
 
 ## Technologies Used
 
+- **Node.js**: JavaScript runtime environment for server-side development.
+- **TypeScript**: Strongly typed programming language that builds on JavaScript.
 - **Express.js**: Fast and minimal web framework for Node.js.
 - **TypeORM**: ORM for managing database interactions with PostgreSQL.
 - **PostgreSQL**: Relational database for storing users, books, and borrow records.
+- **Redis**: In-memory data structure store, used for caching.
+- **Jest**: JavaScript testing framework, used for writing unit and end-to-end tests.
+- **Supertest**: Library for testing HTTP servers, integrated with Jest for E2E tests.
+- **Docker**: Containerization platform used to package applications and dependencies.
+- **Docker Compose**: Tool for defining and running multi-container Docker applications.
 - **tsyringe**: Lightweight Dependency Injection container for TypeScript.
 - **class-transformer**: For DTO transformations and controlling what data is exposed in API responses.
 - **class-validator**: For validating input data.
@@ -109,10 +158,14 @@ Create a .env file in the secrets directory with the following variables:
 
 ```.env
 POSTGRES_HOST=""
-POSTGRES_PORT=""
+POSTGRES_PORT="5432"
 POSTGRES_DB=""
 POSTGRES_USER=""
 POSTGRES_PASSWORD=""
+
+REDIS_URL=""
+REDIS_HOST=""
+REDIS_PORT="6379"
 ```
 
 ## Endpoints
