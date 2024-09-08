@@ -204,6 +204,9 @@ To run the tests within the Docker environment, use the following Docker Compose
 docker exec -it library_api yarn test:e2e
 ```
 
+<img width="566" alt="image" src="https://github.com/user-attachments/assets/54c938ea-4edd-4771-98ca-84c03a0745ff">
+
+
 This command executes the tests inside the Docker container, ensuring that the testing environment is consistent with the development setup.
 
 ## Error Handling
